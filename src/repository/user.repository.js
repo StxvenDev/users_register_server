@@ -6,6 +6,12 @@ const createUserRepository = async (userPayload) => {
   return user;
 }
 
+const getUserByUsernameRepository = async (username) => {
+  const user = await User.findOne({username : username});
+  return user || [];
+}
+
 export {
   createUserRepository,
+  getUserByUsernameRepository
 }
