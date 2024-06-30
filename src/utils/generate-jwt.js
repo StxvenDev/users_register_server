@@ -10,6 +10,7 @@ const generateJwt = ( id = '' ) => {
       {expiresIn:'1h'}, 
       (err, token)=> {
         if(err){
+          console.log(err);
           reject('Something is not working');
         }else{
           resolve(token);

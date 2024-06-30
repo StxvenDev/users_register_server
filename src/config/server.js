@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors'
 import initDatabase from "./database.js";
 import userRouter from '../routers/user.routes.js';
+import cookieParser from 'cookie-parser';
 class Server {
   
   constructor () {
@@ -20,6 +21,7 @@ class Server {
   }
 
   middlewares (){
+    this.app.use(cookieParser());
     this.app.use(express.json());
     this.app.use(express.urlencoded());
     this.app.use(cors());
