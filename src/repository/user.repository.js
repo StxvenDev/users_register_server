@@ -11,7 +11,19 @@ const getUserByUsernameRepository = async (username) => {
   return user;
 }
 
+const deleteUserRepository = async (userId) => {
+   const user = await User.findByIdAndUpdate(userId, {state : false}, {new : true});
+   return user;
+}
+
+const getUserByIdRepository = async (userId) => {
+  const user = await User.findById(userId);
+  return user;
+}
+
 export {
   createUserRepository,
-  getUserByUsernameRepository
+  getUserByUsernameRepository,
+  deleteUserRepository,
+  getUserByIdRepository
 }

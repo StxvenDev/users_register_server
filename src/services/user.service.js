@@ -1,5 +1,5 @@
 import bcryptjs from 'bcryptjs'
-import { createUserRepository, getUserByUsernameRepository } from "../repository/user.repository.js";
+import { createUserRepository, deleteUserRepository, getUserByIdRepository, getUserByUsernameRepository } from "../repository/user.repository.js";
 import generateJwt from '../utils/generate-jwt.js';
 
 const createUserService = async (userPayload) => {
@@ -9,6 +9,14 @@ const createUserService = async (userPayload) => {
 
 const getUserByUsernameService = async (username) => {
   return await getUserByUsernameRepository(username);
+}
+
+const deleteUserService = async (userId) => {
+  const user = getUserByIdRepository(userId);
+  if(!user){
+    throw new Error('The User not exist');
+  }
+  return await deleteUserRepository(userId);
 }
 
 const loginUserService = async (username, password, res) => {
@@ -32,6 +40,7 @@ const loginUserService = async (username, password, res) => {
 export {
   createUserService,
   getUserByUsernameService,
-  loginUserService
+  loginUserService,
+  deleteUserService
 }
 
