@@ -3,10 +3,11 @@ import cors from 'cors'
 import initDatabase from "./database.js";
 import userRouter from '../routers/user.routes.js';
 import cookieParser from 'cookie-parser';
+import { corsOptions } from './corsOptions.js';
 class Server {
   
   constructor () {
-    this.port = 3040
+    this.port = process.env.PORT;
     this.app = express();
     this.database();
     this.path = {
@@ -21,10 +22,10 @@ class Server {
   }
 
   middlewares (){
+    this.app.use(cors(corsOptions));
     this.app.use(cookieParser());
     this.app.use(express.json());
     this.app.use(express.urlencoded());
-    this.app.use(cors());
   }
 
   routes (){
